@@ -7,9 +7,12 @@
 
 #This will need to be updated to --service_version="v2" when it is available.
 
-for ((node=0; node < $1; node++)) 
+num_nodes=${1:-1}
+prefix=${2:-dse}
+
+for ((node=0; node < ${num_nodes}; node++)) 
 do
-	./gcutil --service_version="v2beta1" --project="datastax-perf" adddisk "dse${node}ssd1" --zone="us-central1-b" --storage_type=SSD --size_gb="500"
-	./gcutil --service_version="v2beta1" --project="datastax-perf" addinstance "dsetest${node}" --zone="us-central1-b" --boot_disk_storage_type=SSD --image="dse-backports-debian-7-wheezy" --machine_type="n1-standard-4" --disk="dse${node}ssd1",deviceName=ssd
-done
+			./gcutil --service_version="v2beta1" --project="datastax-perf" adddisk "${prefix}${node}ssd1" --zone="us-central1-b" --storage_type=SSD --size_gb="500"
+				./gcutil --service_version="v2beta1" --project="datastax-perf" addinstance "${prefix}${node}" --zone="us-central1-b" --boot_disk_storage_type=SSD --image="dse-backports-debian-7-wheezy" --machine_type="n1-standard-8" --disk="${prefix}${node}ssd1",deviceName=ssd
+		done
 
