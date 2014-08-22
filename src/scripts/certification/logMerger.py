@@ -13,6 +13,7 @@ with open("mergedOutput.csv","w") as output:
         cluster_size = dir.split("_")[0]
         test_name = "".join(dir.split("_")[1:])
         stress_size = int(cluster_size)/3
+        lineNum = 0
         firstLine = True
         with open(file,"r") as input:
             for line in input:
@@ -23,7 +24,8 @@ with open("mergedOutput.csv","w") as output:
                     if not firstFile:
                         continue
                     elif  firstFile:
-                        output.write(",".join(keepers)+",Test,Cluster_Size\n")
+                        output.write(",".join(keepers)+",Test,Cluster_Size,Time\n")
                         continue
-                output.write(",".join(keepers)+","+test_name+","+cluster_size+"\n")
+                output.write(",".join(keepers)+","+test_name+","+cluster_size+","+str(lineNum)+"\n")
+                lineNum+=1
             firstFile = False

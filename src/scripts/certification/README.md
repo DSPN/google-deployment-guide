@@ -275,6 +275,12 @@ run `logMerger.py` to make mergedOutput.csv which is easier to use with R
 Start R make some graphs
    
     onenode <- read.csv("mergedOutput.csv")
+    ggplot(single, aes( x=Time, y=T_Ops.s)) + stat_smooth(size=1, se=TRUE,fill="blue", level=.99999) + geom_point(alpha = 1/10,size=1) +facet_grid ( Test ~ . )
+    ggplot(single, aes( x=Time, y=M_.95)) + geom_point(alpha = 1/10,size=1) +facet_grid ( Test ~ . ) + ggtitle("Single Node Max 95th Percentile Latency") 
+    
+    ggplot(single ) + geom_density(aes(x=T_Ops.s)) +facet_grid ( Test ~ . ) + ggtitle("Single Node Transactions Per Second") 
+    ggplot(single ) + geom_density(aes(x=T_Ops.s)) +facet_grid ( Test ~ . ) + ggtitle("Single Node Transactions Per Second")
+    
     png("gce_onenode_perf.png")
     ggplot(onenode) + geom_boxplot(aes(x=Test,y=T_Ops.s)) + ggtitle("GCE: 1 Node Performance\n 100M Ops\nCL=ONE")
     dev.off()
