@@ -274,13 +274,26 @@ run `logMerger.py` to make mergedOutput.csv which is easier to use with R
 
 Start R make some graphs
    
+    library("ggplot2") # Install with install.packages("ggplot2")
+    library("doBy") # Install with install.packages("doBy")
+   
     onenode <- read.csv("mergedOutput.csv")
-    ggplot(single, aes( x=Time, y=T_Ops.s)) + stat_smooth(size=1, se=TRUE,fill="blue", level=.99999) + geom_point(alpha = 1/10,size=1) +facet_grid ( Test ~ . )
+    multi <- read.csv("../multi/mergedOutput.csv")
+    
+    #Take a look at the per node rates 
+    summaryBy( (T_pk.s/Cluster_Size) ~ Test, multi )
+    
+    #Generate some quick tables
+    with (multi, tapply(T_pk.s, list(Cluster_Size,Test), mean ))
+    with (single, tapply(T_pk.s, list(Cluster_Size,Test), mean ))
+    with (single, tapply(M_.95, list(Cluster_Size,Test), median ))
+     with (multi, tapply(M_.95, list(Cluster_Size,Test), median ))
+    
     ggplot(single, aes( x=Time, y=M_.95)) + geom_point(alpha = 1/10,size=1) +facet_grid ( Test ~ . ) + ggtitle("Single Node Max 95th Percentile Latency") 
     
     ggplot(single ) + geom_density(aes(x=T_Ops.s)) +facet_grid ( Test ~ . ) + ggtitle("Single Node Transactions Per Second") 
     ggplot(single ) + geom_density(aes(x=T_Ops.s)) +facet_grid ( Test ~ . ) + ggtitle("Single Node Transactions Per Second")
-    
+    ggplot(multi, aes( x=Time, y=T_Ops.s)) + geom_point(alpha = 1/10,size=1) +facet_grid ( Test ~ Cluster_Size ) + ggtitle("Multiple Node Transactions Per Second") 
     png("gce_onenode_perf.png")
     ggplot(onenode) + geom_boxplot(aes(x=Test,y=T_Ops.s)) + ggtitle("GCE: 1 Node Performance\n 100M Ops\nCL=ONE")
     dev.off()
