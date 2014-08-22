@@ -11,9 +11,13 @@
 
 ##Instance setup
 Choose Debian 7 image
+
 1.333tb space, everything on one volume two partitions
+
 [Disk Limits](https://developers.google.com/compute/docs/disks)
+
 [Disk Write Limits](https://developers.google.com/compute/docs/disks#network_egress_caps)
+
 To get maximum write IO I choose 1333gb for max write IO, although I may have been able to get
 better read performance with a bigger drive. I also decided I would use a single volume per instance
 as GCE doesn't perform better with multiple volumes. (see above links)
