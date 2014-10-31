@@ -1,0 +1,6 @@
+
+=== Overview
+
+This document is a guide to getting started with DataStax Enterprise (DSE) in the Google Compute Engine (GCE) cloud. First, this guide will walk through the steps needed to deploy DSE-ready nodes in GCE, and then illustrates how to deploy DSE on those nodes using DataStax OpsCenter. Finally, the guide also discusses deployment considerations to take into account when mapping DSE high-availability features to GCE high-availability mechanisms. All of the scripts in this document, as well as the source-code for the document itself, can be found at the DataStax Partner Network GitHub site. Pull requests for any of the scripts used here, or for any part of this document are welcome.
+
+DataStax Cloud Deployment Guides deliberately avoid the use of popular devops tools like puppet, chef or docker in order to show the step by step instructions required to get up and running from the most basic tools. That way administrators can adapt their own automation suites from the detailed instructions provided here.

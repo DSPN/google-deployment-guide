@@ -1,0 +1,32 @@
+
+=== About Google Compute Engine
+
+For detailed information about GCE, please visit: https://cloud.google.com/compute/
+
+==== Recommended Machine Types
+
+DataStax Enterprise workloads perform best when given a balance of CPU, Memory and low-latency storage. The following GCE machine-types are recommended because they provide the right mix of system resources for a range of workloads. The specific machine type that is right for a given application will depend on the application's performance requirements and budget.
+
+* n1-standard-4
+* n1-standard-8
+* n1-standard-16
+* n1-highmem-4
+* n1-highmem-8
+* n1-highmem-16
+
+For more information on machine types, please visit: https://cloud.google.com/compute/docs/machine-types
+
+==== Google Compute Engine Storage
+
+GCE offers three basic varieties of storage for instances:
+
+[horizontal]
+Standard persistent disk:: This is the most inexpensive storage available, but has relatively poor performance for random reads. In order to attain the highest performance, very large drives have to be provisioned, which wil result in a lot of wasted capacity.
+SSD persistent disk:: At the time of this writing, this should be the default choice for DataStax Enterprise clusters. SSDs provide extremely low-latency response times for random reads while supplying ample sequential write performance for compaction operations. In the event of an instance failure, these volumes will not lose the data and simply need to be attached to a new instance.
+Local SSD:: This is an interesting option that is currently in beta, in the future it will likely be the recommended default choice. Local SSD provides extremely low latency response times to support tight SLAs. In the event of a node failure, data on the local SSD will be lost. In a properly design DSE cluster, this should not be an issue due to the fact that the cluster's replicas will be spread over different zones and regions (see the next section) to minimie the probability that more than one replica is lost at any given time.
+
+Note that it may be necessary to contact Google in order to get quota increases for the SSD storage types.
+
+For more information on GCE disks, please visit: https://cloud.google.com/compute/docs/disks
+
+==== Regions & Zones
