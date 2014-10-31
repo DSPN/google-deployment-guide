@@ -3,6 +3,8 @@
 
 For detailed information about GCE, please visit: https://cloud.google.com/compute/
 
+There are some key GCE topics covered here that are helpful to understand before starting a deployment. In particular, the choice of an appropriate machine-type and storage will help ensure successful initial efforts. For more advanced deployments where high-availability is paramount, it's important to leverage GCE zones & regions correctly.
+
 ==== Recommended Machine Types
 
 DataStax Enterprise workloads perform best when given a balance of CPU, Memory and low-latency storage. The following GCE machine-types are recommended because they provide the right mix of system resources for a range of workloads. The specific machine type that is right for a given application will depend on the application's performance requirements and budget.
@@ -25,8 +27,16 @@ Standard persistent disk:: This is the most inexpensive storage available, but h
 SSD persistent disk:: At the time of this writing, this should be the default choice for DataStax Enterprise clusters. SSDs provide extremely low-latency response times for random reads while supplying ample sequential write performance for compaction operations. In the event of an instance failure, these volumes will not lose the data and simply need to be attached to a new instance.
 Local SSD:: This is an interesting option that is currently in beta, in the future it will likely be the recommended default choice. Local SSD provides extremely low latency response times to support tight SLAs. In the event of a node failure, data on the local SSD will be lost. In a properly design DSE cluster, this should not be an issue due to the fact that the cluster's replicas will be spread over different zones and regions (see the next section) to minimie the probability that more than one replica is lost at any given time.
 
-Note that it may be necessary to contact Google in order to get quota increases for the SSD storage types.
+_Note that it may be necessary to contact Google in order to get quota increases for the SSD storage types._
 
 For more information on GCE disks, please visit: https://cloud.google.com/compute/docs/disks
 
 ==== Regions & Zones
+
+GCE regions and zone roughly correspond to the Cassandra data center and rack concepts respectively. Regions are geographically separated from one another and contain three zones that are physically isolated to reduce the chance of an event in one zone affecting resources in another. Similarly, geographic scale events such as hurricanes will likely only have an impact on any single region at a time. Zones should be mapped to Cassandra racks and typical deployments with a cluster replication factor of three, should use all three zones within a region. Multi-data center deployments will typically use each region as a data center.
+
+Support for GCE snitching is provided by default in recent versions of DSE and Apache Cassandra. For details on this integration, please refer to: https://issues.apache.org/jira/browse/CASSANDRA-7132
+
+NOTE: Snitches are Cassandra's mechanism for determining node topology. For more information on snitches, refer to the http://www.datastax.com/documentation/cassandra/2.0/cassandra/architecture/architectureSnitchesAbout_c.html[DataStax Documentation.]
+
+For more information on GCE regions & zones, please visit:https://cloud.google.com/compute/docs/zones
