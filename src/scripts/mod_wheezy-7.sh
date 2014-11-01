@@ -8,7 +8,7 @@
 #Base OS list: https://developers.google.com/compute/docs/operating-systems#backportsimages
 
 apt-get update
-apt-get install less htop patch libjna-java sysstat iftop binutils pssh pbzip2 zip unzip openssl curl liblzo2-dev ntp git python-pip tree unzip dstat ethtool
+apt-get install -y less htop patch libjna-java sysstat iftop binutils pssh pbzip2 zip unzip openssl curl liblzo2-dev ntp git python-pip tree unzip dstat ethtool
 
 #Don't need to disable swap
 #Disable Swap
@@ -31,7 +31,7 @@ patch --backup /etc/rc.local <<END
 > echo 0 > /sys/block/sdb/queue/rotational
 > blockdev --setra 0 /dev/sdb
 > /usr/share/google/safe_format_and_mount -m "mkfs.ext4 -F" /dev/sdb /var/lib/cassandra
->
+> 
 END
 
 cat >> /etc/sysctl.conf <<EndCtl
