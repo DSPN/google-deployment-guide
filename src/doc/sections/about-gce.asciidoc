@@ -39,4 +39,4 @@ Support for GCE snitching is provided by default in recent versions of DSE and A
 
 NOTE: Snitches are Cassandra's mechanism for determining node topology. For more information on snitches, refer to the http://www.datastax.com/documentation/cassandra/2.0/cassandra/architecture/architectureSnitchesAbout_c.html[DataStax Documentation.]
 
-For more information on GCE regions & zones, please visit:https://cloud.google.com/compute/docs/zones
+For more information on GCE regions & zones, please visit: https://cloud.google.com/compute/docs/zones
