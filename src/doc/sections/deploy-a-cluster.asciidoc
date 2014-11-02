@@ -95,4 +95,25 @@ NOTE: It is worthwhile to read up on the naming rules for storage buckets and ob
 
 Once the image is transferred, exit from the GCE customizer instance, it can now be deleted: `gcloud compute instances delete --zone us-central1-b customizer`
 
-==== Start cloud instances
+==== Start customized instances
+
+Prior to starting instances based on the new customized boot volume, it has to be converted to a bootable image. These steps perform the conversion and then create an instance based on the customized image. Connect to the new instance and ensure that the customizations have taken effect. In particular, check for the existence of Oracle Java 7 by running `java -version` and that the attached disk is correctly mounted at /var/lib/cassandra with `df -h`.
+
+.Create the image and test instance
+[source,bash]
+----
+gcloud compute images create dse-debian-7-backports --source-uri gs://my-images/DSE-prepped-backports-debian-7-wheezy.image.tar.gz
+gcloud compute disks create testdisk  --zone us-central1-b --size 100GB --type pd-ssd
+gcloud compute instances create testcustom --zone us-central1-b --machine-type=n1-highmem-4 --image dse-debian-7-backports --disk name=testdisk device-name=ssd
+gcloud compute ssh --zone us-central1-b testcustom
+----
+
+Delete the instance once it's been established that it's configured correctly.
+
+To start multiple DSE-ready instances, customize & execute the following script. Before attempting to start a large cluster, double check the available quota for resources like disk & CPUs. It may be necessary to request quota increases.
+
+.Start multiple instances
+[source,bash]
+----
+include::../../../src/scripts/start_instances.sh[]
+----

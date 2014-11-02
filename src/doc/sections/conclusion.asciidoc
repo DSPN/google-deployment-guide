@@ -1,5 +1,4 @@
 
 === Conclusion
 
-This document covers tha basics of getting up and running with DataStax Entperprise in GCE. The OpsCenter deployment shown here is a simple one data center cluster without rack awareness. Production deployments should use GCE zones to implement rack awareness and GCE regions to implement data centers. Instructions on how to install and configure DSE for more complex topologies can be found here: http://www.datastax.com/documentation/datastax_enterprise/4.5/datastax_enterprise/install/installTOC.html
- 
+This document covers tha basics of getting up and running with DataStax Entperprise in GCE. The OpsCenter-based deployment shown here is a simple one data center cluster without rack awareness. Production deployments should use GCE zones to implement rack awareness and GCE regions to implement data centers. Instructions on how to install and configure DSE for more complex topologies can be found here: http://www.datastax.com/documentation/datastax_enterprise/4.5/datastax_enterprise/install/installTOC.html
