@@ -15,6 +15,7 @@ apt-get install -y less htop patch libjna-java sysstat iftop binutils pssh pbzip
 #swapoff -a
 
 #Need to mount SSD
+mkdir -p /var/lib/cassandra
 #https://developers.google.com/compute/docs/disks#formatting
 #/usr/share/google/safe_format_and_mount -m "mkfs.ext4 -F" <disk-name> <mount-point>
 patch --backup /usr/share/google/safe_format_and_mount <<SFAM
