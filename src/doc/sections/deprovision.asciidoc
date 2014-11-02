@@ -1,0 +1,10 @@
+
+=== Deprovisioning
+
+Deprovisioning can always be done via the GCE console. Be sure to check the VM Instances tab as well as the Disks tab. However it may be more convenient to use a script like the following to deprovision larger clusters.
+
+.Deprovision
+[source,bash]
+----
+include:../../../src/scripts/rm_instances.sh[]
+----

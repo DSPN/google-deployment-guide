@@ -1,0 +1,36 @@
+
+==== Prepare for OpsCenter Deployment
+
+===== Collect cluster IPs
+
+In order for OpsCenter to deploy DSE, the internal IP addresses of the newly created nodes will have to be provided to the Create Cluster dialog. Collect those now with the following script.
+
+[source,bash]
+----
+gcloud compute instances list | awk '{print $4}'
+----
+
+===== Set up OpsCenter
+
+Start an additional instance to serve as the OpsCenter node. This can be a machine-type with fewer resources than is required for DSE. Note the public IP of this node. It will be used in the next step to connect to the OpsCenter web-console.
+
+.Setup OpsCenter
+[source,bash]
+----
+gcloud compute instances create opscenter --zone us-central1-b --machine-type=n1-standard-2 --image debian-7-backports
+gcloud compute ssh opscenter
+----
+
+Connect and install OpsCenter using http://www.datastax.com/documentation/opscenter/5.0/opsc/install/opscInstallDeb_t.html[these instructions].
+It's also advisable to http://www.datastax.com/documentation/opscenter/5.0/opsc/configure/opscConfiguringEnablingHttps_t.html[configure HTTPS] and http://www.datastax.com/documentation/opscenter/5.0/opsc/configure/opscEnablingAuth.html[enable authentication].
+
+Finally, it will be necessary to configure a GCE firewall rule to allow traffic to pass to the OpsCenter node. Networks and firewalls are a relatively complex topic in GCE. It's advisable to https://cloud.google.com/compute/docs/networking[review the documentation] before configuring firewall rules for production clusters.
+
+.Simple Firewall rule for OpsCenter
+[source,bash]
+----
+#Note the port used if HTTPS was set up for OpsCenter, modify this as needed
+gcloud compute firewall-rules create opscenter-http \
+--description "Incoming OpsCenter HTTP traffic." \
+--allow tcp:8888 tcp:8443
+----
