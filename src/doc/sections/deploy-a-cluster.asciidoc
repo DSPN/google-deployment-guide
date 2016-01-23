@@ -53,7 +53,7 @@ This script installs some useful packages, including Oracle's Java distribution,
 .Wheezy customizations for DSE
 [source,bash]
 ----
-include::../../../src/scripts/mod_wheezy-7.sh[]
+#include::../../../src/scripts/mod_wheezy-7.sh[]
 ----
 
 Once any desired customizations have been made, execute the script:
@@ -115,5 +115,5 @@ To start multiple DSE-ready instances, customize & execute the following script.
 .Start multiple instances
 [source,bash]
 ----
-include::../../../src/scripts/start_instances.sh[]
+#include::../../../src/scripts/start_instances.sh[]
 ----
