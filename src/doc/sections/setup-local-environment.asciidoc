@@ -47,7 +47,7 @@ If all went well, output should look something like this:
 
 image::gitclone.png[]
 
-Now cd into the repo dir and list files there using the commands
+Now cd into the repo dir and list files there using the commands:
 
 ----
 cd google-cloud-platform-dse
@@ -56,7 +56,7 @@ ls
 
 image::cdrepodir.png[]
 
-Our main entry point is a file called deploy.sh.  We can inspect that file using the command
+Our main entry point is a file called deploy.sh.  We can inspect that file using the command:
 
 ----
 cat deploy.sh
@@ -71,3 +71,13 @@ cat clusterParameters.yaml
 ----
 
 image::clusterparameters.png[]
+
+This config is going to create 3 nodes in each of 3 different regions, for a total of 9 nodes.  Each node is a very small machine, an n1-standard-1.  This isn't a size we'd recommend for production use but is fine for testing out a deployment.  Similarly, each node will be configured with a 10GB pd-ssd.  This is an extremely small disk for a production environment but will be fine for our test deployment.
+
+Two example config files are provided, clusterParameters.small.yaml and clusterParameters.large.yaml.  The large one creates nodes in every Google zone currently available.  You may need to request you core quotas be increased to run it.
+
+At the time of this writing, the current release of OpsCenter, 5.2.4, can provision a maximum of 100 nodes across all data centers.
+
+We encourage you to look at the templates more and better understand what they're doing.  They are provided to get you started and we fully expect you to customize them in ways that suit your needs.
+
+Now that we've had a look through the project, let's try running it!

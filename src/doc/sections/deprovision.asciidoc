@@ -1,10 +1,16 @@
 
 === Deprovisioning
 
-Deprovisioning can always be done via the GCE console. Be sure to check the VM Instances tab as well as the Disks tab. However it may be more convenient to use a script like the following to deprovision larger clusters.
+Deprovisioning can be done via the command line or the web UI.  To use the console type the command:
 
-.Deprovision
-[source,bash]
 ----
-include:../../../src/scripts/rm_instances.sh[]
+gcloud deployment-manager deployments delete ben1
 ----
+
+Running from the command line, I see the following output;
+
+image::deletedeploymentinconsole.png[]
+
+To delete the deployment in the web UI, click the trash can icon on the "Deployment Manager" page as show below:
+
+image::deletedeployment.png[]
