@@ -23,20 +23,20 @@ For more information on machine types, please visit: https://cloud.google.com/co
 GCE offers three basic varieties of storage for instances:
 
 [horizontal]
-Standard persistent disk:: This is the most inexpensive storage available, but has relatively poor performance for random reads. In order to attain the highest performance, very large drives have to be provisioned, which wil result in a lot of wasted capacity.
-SSD persistent disk:: At the time of this writing, this should be the default choice for DataStax Enterprise clusters. SSDs provide extremely low-latency response times for random reads while supplying ample sequential write performance for compaction operations. In the event of an instance failure, these volumes will not lose the data and simply need to be attached to a new instance.
-Local SSD:: This is an interesting option that is currently in beta, in the future it will likely be the recommended default choice. Local SSD provides extremely low latency response times to support tight SLAs. In the event of a node failure, data on the local SSD will be lost. In a properly design DSE cluster, this should not be an issue due to the fact that the cluster's replicas will be spread over different zones and regions (see the next section) to minimie the probability that more than one replica is lost at any given time.
-
-_Note that it may be necessary to contact Google in order to get quota increases for the SSD storage types._
+Solid-state persistent disks:: At the time of this writing, this should be the default choice for DataStax Enterprise clusters. SSDs provide extremely low-latency response times for random reads while supplying ample sequential write performance for compaction operations. In the event of an instance failure, these volumes will not lose the data and simply need to be attached to a new instance.  In recent benchmarks conducted both by Google and DataStax customers the performance of pd-ssd exceeded both pd-hdd and local-ssd.  Google has advised that pd-ssd storage is limited by network bandwidth as the underlying disk is highly parallelized.
+Standard persistent disks:: This is the most inexpensive storage available.  It relies on an underlying spinning disk and has relatively poor performance for random reads. In order to attain the highest performance, very large drives have to be provisioned, which will result in a lot of wasted capacity.
+Local SSD:: Local SSD provides extremely low latency response times to support tight SLAs. In the event of a node failure, data on the local SSD will be lost. In a properly design DSE cluster, this should not be an issue due to the fact that the cluster's replicas will be spread over different zones and regions (see the next section) to minimize the probability that more than one replica is lost at any given time.
 
 For more information on GCE disks, please visit: https://cloud.google.com/compute/docs/disks
 
 ==== Regions & Zones
 
-GCE regions and zone roughly correspond to the Cassandra data center and rack concepts respectively. Regions are geographically separated from one another and contain three zones that are physically isolated to reduce the chance of an event in one zone affecting resources in another. Similarly, geographic scale events such as hurricanes will likely only have an impact on any single region at a time. Zones should be mapped to Cassandra racks and typical deployments with a cluster replication factor of three, should use all three zones within a region. Multi-data center deployments will typically use each region as a data center.
+GCE regions and zones roughly correspond to the DSE data center and rack concepts respectively. Regions are geographically separated from one another and contain three zones that are physically isolated to reduce the chance of an event in one zone affecting resources in another. Similarly, geographic scale events such as hurricanes will likely only have an impact on any single region at a time. Zones should be mapped to DSE racks and typical deployments with a cluster replication factor of three, should use all three zones within a region. Multi-data center deployments will typically use each region as a data center.
 
-Support for GCE snitching is provided by default in recent versions of DSE and Apache Cassandra. For details on this integration, please refer to: https://issues.apache.org/jira/browse/CASSANDRA-7132
+Support for GCE snitching is provided by default in recent versions of DSE. For details on this integration, please refer to: https://issues.apache.org/jira/browse/CASSANDRA-7132
 
-NOTE: Snitches are Cassandra's mechanism for determining node topology. For more information on snitches, refer to the http://www.datastax.com/documentation/cassandra/2.0/cassandra/architecture/architectureSnitchesAbout_c.html[DataStax Documentation.]
+NOTE: Snitches are DSE's mechanism for determining node topology. For more information on snitches, refer to the http://www.datastax.com/documentation/cassandra/2.0/cassandra/architecture/architectureSnitchesAbout_c.html[DataStax Documentation.]
+
+The templates currently provided do not make use of rack awareness or the Google specific snitch.  Instead they use the GossipingPropertyFileSnitch and place replicas in a single rack.  We would like to change this in future releases of the template.
 
 For more information on GCE regions & zones, please visit: https://cloud.google.com/compute/docs/zones
