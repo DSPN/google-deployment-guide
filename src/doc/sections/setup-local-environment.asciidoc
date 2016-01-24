@@ -32,3 +32,42 @@ After creating the project, set it as the default project that gcloud will use f
 ----
 gcloud config set project myproject
 ----
+
+==== Clone the Template Repo
+
+Now that you have the gcloud tools installed, you'll want to clone of copy of the https://github.com/DSPN/google-cloud-platform-dse[template repo].
+
+To do that, use the following command:
+
+----
+git clone https://github.com/DSPN/google-cloud-platform-dse.git
+----
+
+If all went well, output should look something like this:
+
+image::gitclone.png[]
+
+Now cd into the repo dir and list files there using the commands
+
+----
+cd google-cloud-platform-dse
+ls
+----
+
+image::cdrepodir.png[]
+
+Our main entry point is a file called deploy.sh.  We can inspect that file using the command
+
+----
+cat deploy.sh
+----
+
+image::deploy.png[]
+
+This is an extremely simple shell script that invokes the gcloud command.  It takes one argument, the name of the deployment.  The deployment name needs to be unique within you project.  The deploy.sh script also depends on the input file clusterParameters.yaml.  This file defines our cluster topology.  Let's take a quick look with the following command:
+
+----
+cat clusterParameters.yaml
+----
+
+image::clusterparameters.png[]
