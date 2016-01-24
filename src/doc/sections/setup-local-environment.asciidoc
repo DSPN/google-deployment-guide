@@ -1,0 +1,34 @@
+=== Setup Local Environment
+
+==== Prerequisites
+
+Obtain a GCE account:: Follow https://cloud.google.com/compute/docs/signup[Google's instructions] to get set up with an account and to activate cloud access. Note that Google offers a https://console.developers.google.com/freetrial[free trial] for new users.
+
+Get the tools:: The scripts in this document rely on the https://cloud.google.com/compute/docs/gcloud-compute/[gcloud] command line tool.
+
+.Install gcloud on Mac or Linux
+[source,bash]
+----
+curl https://sdk.cloud.google.com | bash
+gcloud components update
+----
+
+To install gcloud on windows, follow https://cloud.google.com/compute/docs/gcloud-compute/#install[these instructions].
+
+Detailed instructions for using gcloud to interact with GCE compute resources can be found here: https://cloud.google.com/compute/docs/gcloud-compute/
+
+Create an authentication token:: GCE uses OAuth tokens to manage resource authentication. Logging in is generally as simple as running `gcloud auth login` but if problems are encountered, follow https://cloud.google.com/compute/docs/gcloud-compute/#auth [these more detailed instructions] to establish the authentication tokens.
+
+Log in to the console:: Despite the fact that the commands in this guide use the command line interface, the Google cloud console is still a very useful resource to use while running a cluster. Many of the administrative actions that can be performed in the console will also provide the equivalent command line invocation, which can be a very useful way to learn the gcloud tool. Log in to your console at: https://console.developers.google.com/
+
+Create a project (optional):: Use the console to create a project for the DataStax Enterprise deployment. Click the create project button and assign a useful name, this guide will use the name "myproject". The project-id field has to be globally unique, so it is convenient to use the suggestion provided by the tool, but it is possible to specify it manually.
+
+image::createproject.png[]
+
+After creating the project, set it as the default project that gcloud will use for all commands.
+
+.Set the default project
+[source,bash]
+----
+gcloud config set project myproject
+----

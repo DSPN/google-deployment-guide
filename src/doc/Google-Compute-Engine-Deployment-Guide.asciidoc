@@ -13,7 +13,7 @@ include::{sourcedir}/sections/overview.asciidoc[]
 include::{sourcedir}/common/about-datastax.asciidoc[]
 include::{sourcedir}/sections/about-gce.asciidoc[]
 
-
+include::{sourcedir}/sections/setup-local-environment.asciidoc[]
 
 include::{sourcedir}/sections/deprovision.asciidoc[]
 include::{sourcedir}/sections/conclusion.asciidoc[]
