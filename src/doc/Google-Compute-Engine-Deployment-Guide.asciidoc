@@ -4,7 +4,7 @@
 :highlightjs-theme: foundation
 :prewrap!:
 
-== DataStax Enterprise Deployment Guide for Google Compute Engine
+== DataStax Enterprise Deployment Guide for Google
 
 :sourcedir: ./src/doc
 :imagesdir: ../../images
