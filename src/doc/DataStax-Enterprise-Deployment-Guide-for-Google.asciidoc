@@ -10,7 +10,7 @@
 :imagesdir: ../../images
 
 include::{sourcedir}/sections/overview.asciidoc[]
-include::{sourcedir}/common/about-datastax.asciidoc[]
+include::{sourcedir}/sections/about-datastax.asciidoc[]
 include::{sourcedir}/sections/about-gce.asciidoc[]
 
 include::{sourcedir}/sections/setup-local-environment.asciidoc[]
