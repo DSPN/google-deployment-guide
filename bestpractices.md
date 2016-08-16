@@ -11,11 +11,15 @@ We are currently working on Deployment Manager templates for GKE as well as a Go
 ## Compute
 
 DataStax Enterprise workloads perform best when given a balance of CPU, Memory and low-latency storage. The following GCE machine-types are recommended because they provide a good mix of system resources for a range of workloads. The specific machine type that is right for a given application will depend on the performance requirements of the application.
+* n1-standard-2
+* n1-standard-4
+* n1-standard-8
+* n1-standard-16
+* n1-highmem-2
+* n1-highmem-4
+* n1-highmem-8
+* n1-highmem-16
 
-n1-standard-8
-n1-standard-16
-n1-highmem-8
-n1-highmem-16
 For more information on machine types, please visit: https://cloud.google.com/compute/docs/machine-types
 
 The DataStax documentation provides detail on recommended machine types as well: http://docs.datastax.com/en/latest-dse/datastax_enterprise/install/installGUI.html
@@ -38,7 +42,7 @@ For more information on GCE disks, please visit: https://cloud.google.com/comput
 
 GCP regions and zones roughly correspond to the DSE data center and rack concepts respectively. Regions are geographically separated from one another and contain zones that are physically isolated to reduce the chance of an event in one zone affecting resources in another. Geographic scale events such as hurricanes will likely only have an impact on any single region at a time. Zones should be mapped to DSE racks.  Multi-data center deployments will typically use each region as a data center.
 
-While DataStax provides a Google specific snitch, we typically recommend GossipingPropertyFileSnitch (GPFS) for most deployments.  GPFS is the most widely used snitch.  It also allows for hybrid deployments either across clouds or on-premises.  
+While DataStax provides a Google specific snitch, we typically recommend GossipingPropertyFileSnitch (GPFS) for most deployments.  GPFS is the most widely used snitch.  It also allows for hybrid deployments either across clouds or on-premises.
 
 The templates currently provided do not make use of rack awareness.  Instead they use the GossipingPropertyFileSnitch and place replicas in a single rack. We would like to change this in future releases of the template.
 
