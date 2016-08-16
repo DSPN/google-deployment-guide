@@ -1,4 +1,0 @@
-
-=== Overview
-
-This document describes how to use templates to deploy DataStax Enterprise (DSE) on the Google Compute Engine (GCE) service that is part of the Google Cloud Platform (GCP).  Pull requests for any of the https://github.com/DSPN/google-cloud-platform[templates] used here, or for any part of this https://github.com/DSPN/cloud-dg-gce[document] are welcome.
