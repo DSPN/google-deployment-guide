@@ -1,4 +1,4 @@
-#deployment-guide-google
+#google-deployment-guide
 
 We currently are not using Asciidoc for the deployment guide, instead editing through a web UI.  As a result, this deployment guide is not currently being maintained.  You can view the current deployment guide [here](https://academy.datastax.com/demos/deployment-guide-google).
 
