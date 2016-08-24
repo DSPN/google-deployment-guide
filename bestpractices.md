@@ -6,8 +6,6 @@ This section of the deployment guide covers recommendations for compute, storage
 
 GCP includes both Google Compute Engine (GCE) and Google Container Engine (GKE).  DataStax Enterprise can be deployed to either environment.  This guide covers hardware recommendations as well as Google Deployment Manager templates for deploying on GCE.
 
-We are currently working on Deployment Manager templates for GKE as well as a Google Cloud Launcher solution.
-
 ## Compute
 
 DataStax Enterprise workloads perform best when given a balance of CPU, Memory and low-latency storage. The following GCE machine-types are recommended because they provide a good mix of system resources for a range of workloads. The specific machine type that is right for a given application will depend on the performance requirements of the application.
