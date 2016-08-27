@@ -62,6 +62,6 @@ From there you can issue any valid cql command.  For instance:
     
 ## Next Steps
 
-If you want to learn more about DataStax Enterprise, the online training course at https://academy.datastax.com/ are a great place to start.
+If you want to learn more about DataStax Enterprise, the online training courses at https://academy.datastax.com/ are a great place to start.
 
 To learn more about running DataStax Enterprise on GCP take a look at the [bestpractices guide](bestpractices.md) and [post deploy steps](postdeploy.md).
