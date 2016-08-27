@@ -21,25 +21,21 @@ The infrastructure will take a few minutes to deploy.  When complete you should 
 
 ![](./img/deployed.png)
 
-Scroll down to the OpsCenter machine and select it:
+To view OpsCenter, the DataStax admin interface, we will need to create an ssh tunnel.  To do that, open a terminal on your local machine and run the command:
 
-![](./img/opscentermachine.png)
+    gcloud compute ssh --ssh-flag=-L8888:localhost:8888 --project=<NAME OF YOUR PROJECT> --zone=us-central1-f datastax-enterprise-1-opscenter-vm 
 
-Click "Manage Resource"
+In my case, the project is named datastax-dev, though it will have a different name for you.
 
-![](./img/vminstance.png)
+![](./img/tunnel.png)
 
-Scroll down to the external IP and select it
-
-![](./img/externalip.png)
-
-To view OpsCenter, the DataStax admin interface, open a web browser to port 8888 on the external IP.  Note, if you do this very soon after deployment, the cluster may not have completed setup yet.
+Now, we can open a web browser to http://localhost:8888 to view OpsCenter.
 
 ![](./img/opscenter.png)
 
 Great!  You now have a DataStax Enterprise cluster running with 3 nodes in Asia, Europe and America.
 
-We can also log into a node to interact with the database.  To do that go back to the Google console and click the back arrow in the upper left.  This will return you to the view of the deployment.
+We can also log into a node to interact with the database.  To do that go back to the Google console.
 
 ![](./img/nodes.png)
 
