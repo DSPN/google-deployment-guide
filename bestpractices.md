@@ -44,4 +44,6 @@ While DataStax provides a Google specific snitch, we typically recommend Gossipi
 
 The templates currently provided do not make use of rack awareness.  Instead they use the GossipingPropertyFileSnitch and place replicas in a single rack. We would like to change this in future releases of the template.
 
+The templates currently use dynamic IP addresses rather than static IP addresses.  If the nodes are halted and deallocated the dynamic IP addresses will be reassigned.  However, if nodes are not halted and deallocated the dynamic IPs will remain the same through reboots and hardware failures.
+
 For more information on GCP regions & zones, please visit: https://cloud.google.com/compute/docs/zones
