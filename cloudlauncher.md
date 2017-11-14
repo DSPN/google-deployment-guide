@@ -13,52 +13,47 @@ You can take the default settings or customize them.  When complete click "Deplo
 
 ![](./img/deploying.png)
 
-That's it!  You're cluster is now deploying.
+That's it!  Your cluster is now deploying.
 
 ## Inspecting the Cluster
 
-The infrastructure will take a few minutes to deploy.  When complete you should see:
+When complete you should see:
 
 ![](./img/deployed.png)
 
-To view OpsCenter, the DataStax admin interface, we will need to create an ssh tunnel.  To do that, open a terminal on your local machine and run the command:
+To view OpsCenter, the DataStax admin interface, we will need to create an ssh tunnel.  To do that, copy & paste the black box inside the red oval to your terminal:
 
-    gcloud compute ssh --ssh-flag=-L8888:localhost:8888 --project=<NAME OF YOUR PROJECT> --zone=us-central1-f datastax-enterprise-1-opscenter-vm 
+![](./img/tunnel-console.png)
 
-In my case, the project is named datastax-dev, though it will have a different name for you.
+It should look like the following when you run the command:
 
 ![](./img/tunnel.png)
 
-Now, we can open a web browser to http://localhost:8888 to view OpsCenter.
+Now, we can open a web browser to https://localhost:8443 to view OpsCenter.  Before that, grab the OpsCenter "admin" user's password.
 
-![](./img/opscenter.png)
+![](./img/creds-opsc.png)
 
-Great!  You now have a DataStax Enterprise cluster running with 3 nodes in Asia, Europe and America.
+![](./img/opscenter-login.png)
 
-We can also log into a node to interact with the database.  To do that go back to the Google console.
+![](./img/opscenter-console.png)
 
-![](./img/nodes.png)
+Great!  You now have a DataStax Enterprise cluster running with 1 node each in Asia, Europe and America regions.
 
-Click on any node.  In DataStax Enterprise the nodes are homogeneous so we can interact with any one.
+We can also log into a node to interact with the database.  To do that go back to the Google console and follow the red arrow to start a ssh session using "Open in browser window" option..
 
-![](./img/node.png)
+![](./img/ssh.png)
 
-We can connect to that node by clicking "SSH."  This will open an SSH window.
+Then grab your DSE cluster's "cassandra" user's password as follows:
 
-![](./img/terminal.png)
+![](./img/creds-cassandra.png)
 
-At this point we can clear the terminal window and start up cqlsh, the command line interface to DataStax Enterprise.
-
-    clear
-    cqlsh
+Connect to your DSE cluster by running the following cqlsh command:
 
 ![](./img/cqlsh.png)
 
-From there you can issue any valid cql command.  For instance:
+Run a cql command "desc keyspaces" to view the existing keyspaces in your DSE cluster:
 
-    desc keyspace
-    
-![](./img/desc.png)
+![](./img/desc-keyspaces.png)
 
 ## Next Steps
 
