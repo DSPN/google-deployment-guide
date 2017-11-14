@@ -29,7 +29,7 @@ It should look like the following when you run the command:
 
 ![](./img/tunnel.png)
 
-Now, we can open a web browser to https://localhost:8443 to view OpsCenter.  Before that, grab the OpsCenter "admin" user's password.
+Now, we can open a web browser to https://localhost:8443 to view OpsCenter.  Before that, grab the OpsCenter "admin" user's password to log into your OpsCenter instance.
 
 ![](./img/creds-opsc.png)
 
@@ -39,11 +39,11 @@ Now, we can open a web browser to https://localhost:8443 to view OpsCenter.  Bef
 
 Great!  You now have a DataStax Enterprise cluster running with 1 node each in Asia, Europe and America regions.
 
-We can also log into a node to interact with the database.  To do that go back to the Google console and follow the red arrow to start a ssh session using "Open in browser window" option..
+We can also log into a node to interact with the database.  To do that go back to the Google console and follow the red arrow as shown below to start an ssh session using the "Open in browser window" option.
 
 ![](./img/ssh.png)
 
-Then grab your DSE cluster's "cassandra" user's password as follows:
+Then grab your DSE cluster's "cassandra" user's password as shown below:
 
 ![](./img/creds-cassandra.png)
 
