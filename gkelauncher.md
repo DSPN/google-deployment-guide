@@ -1,2 +1,2 @@
-## DataStax Enterprise Kubernetes Application User Guide on GCP Marketplace
+## DataStax Enterprise Kubernetes Application User Guide [GCP Marketplace]
 
