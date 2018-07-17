@@ -23,6 +23,9 @@ kubectl exec -it dse-dse-server-0 nodetool status
 
 kubectl exec -it dse-dse-server-0 cqlsh
 
+## Scaling
+Scaling up and scaling down will be provided future release
+
 
 
 
