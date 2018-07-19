@@ -79,6 +79,9 @@ First, you would go the the DataStax Enterprise Kubernetes *Application details*
 ### Deleting the persistent values of your deployment
 By design, deleting a StatefulSets in Kubernetes does not remove PersistentVolumeClaims that were attached to their Pods.  This prevents users from losing their stateful data accidentally.  To remove the PersistentVolumeClaims with their attached persistent disks, you need to run the following commands:
 ```
+export APP_INSTANCE_NAME=<your-app-instance-name>
+export NAMESPACE=<namespace-for-your-deployment>
+
 for pv in $(kubectl get pvc --namespace $NAMESPACE \
   --selector app.kubernetes.io/name=$APP_INSTANCE_NAME \
   --output jsonpath='{.items[*].spec.volumeName}');
