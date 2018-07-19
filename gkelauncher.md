@@ -9,7 +9,7 @@ There are minimum cluster requirements that MUST be met for the deployment to su
 ### Quick install with Google Cloud Marketplace
 Get up and running with a few clicks! Install this DataStax Enterprise app to a Google Kubernetes Engine cluster using Google Cloud Marketplace. Follow the [on-screen instructions](https://console.cloud.google.com/marketplace/details/datastax-public/datastax-enterprise-gke).
 
-### Veirfy the status of the DataStax Enterprise deployment
+### Verify the status of your DataStax Enterprise deployment
 If your deployment is successful, you can check the status of your DataStax Enterprise cluster using the *nodetool status* command as follows:
 ```
 kubectl exec -it "${APP_INSTANCE_NAME}-dse-server-0" --namespace "${NAMESPACE}" nodetool status
