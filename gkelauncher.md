@@ -14,7 +14,7 @@ If your deployment is successful, you can check the status of your DataStax Ente
 ```
 kubectl exec -it "${APP_INSTANCE_NAME}-dse-server-0" --namespace "${NAMESPACE}" nodetool status
 ```
-Sample output should look like the following:
+Sample output as shown below:
 ```
 Datacenter: Cassandra
 =====================
