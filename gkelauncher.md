@@ -1,4 +1,4 @@
-## DataStax Enterprise Kubernetes Application User Guide for the GCP Marketplace
+## DataStax Enterprise (DSE) Kubernetes Application User Guide for the GCP Marketplace
 
 This document provides instructions for deploying Datastax Enterprise (DSE) as a Kubernetes app in the GCP Marketplace
 
@@ -49,7 +49,21 @@ You should see the console of DataStax Enterprise OpsCenter like below:
 
 
 ## Scaling the DataStax Enterprise cluster
-Coming soon...
+### Scaling up the DataStax Enterprise cluster
+By default, the DataStax Enterprise Kubernetes app is deployed using 3 replicas (equivalent to 3 DSE nodes). To increase the number of replicas (the number of DSE nodes), use the following command:
+```
+kubectl scale statefulsets "$APP_INSTANCE_NAME-dse-server" \
+  --namespace "$NAMESPACE" --replicas=[NEW_REPLICAS]
+```
+where [NEW_REPLICAS] is the new number.
+
+### Scaling down the DataStax Enterprise cluster
+You can manually scale down the DataStax Enterprise cluster using the following procedure.  On each node, you are required to do the following steps starting from the highest-numbered pod of the DSE StatefulSet:
+* Inside the DSE container, run $ nodetool decommission.
+* Scale down the StatefulSet by one, using the kubectl scale sts command.
+* Wait until the pod is removed from the cluster successfully.
+* Remove any persistent volume claim(s) that belong to that replica (DSE node) using the *$ kubectl delete pvc* command.
+Repeat this procedure until the DataStax Enterprise cluster has your desired number of pods (DSE nodes).
 
 
 ## Backup and restore
