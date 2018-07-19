@@ -3,7 +3,7 @@
 This document provides instructions for deploying and decommissioning Datastax Enterprise (DSE) as a Kubernetes app in the GCP Marketplace.
 
 ## IMPORTANT NOTE 
-There are minimum cluster requirements that MUST be met for the deployment to succeed. Please ensure you have a cluster meeting these minimums before deploying. The requirements are *5 nodes of instance type n1-standard-4 with at least 60GB of disk size for each DSE node*.
+There are minimum cluster requirements that MUST be met for the deployment to succeed. Please ensure you have a cluster meeting these minimums before deploying. The requirements are **5 nodes of instance type n1-standard-4 with at least 60GB of disk size for each DSE node**.
 
 ## Installation
 ### Quick install with Google Cloud Marketplace
@@ -62,7 +62,7 @@ You can manually scale down the DataStax Enterprise cluster using the following 
 * Inside the DSE container, run $ nodetool decommission.
 * Scale down the StatefulSet by one, using the kubectl scale sts command.
 * Wait until the pod is removed from the cluster successfully.
-* Remove any persistent volume claim(s) that belong to that replica (DSE node) using the *$ kubectl delete pvc* command.
+* Remove any persistent volume claim(s) that belong to that replica (DSE node) using the **$ kubectl delete pvc** command.
 
 Repeat this procedure until the DataStax Enterprise cluster has your desired number of pods (DSE nodes).
 
@@ -73,7 +73,7 @@ Will be provided in future releases
 
 ## Uninstall the DataStax Enterprise Kubernetes Application
 ### Deleting the DataStax Enterprise Kubernetes app in GCP console
-First, you would go the the DataStax Enterprise Kubernetes *Application details* screen to *DELETE* the application.  See below our sample screen:
+First, you would go the the DataStax Enterprise Kubernetes **Application details** screen to **DELETE** the application.  See below our sample screen:
 ![](./img/gcp_console_app_delete.png)
 
 ### Deleting the persistent values of your deployment
