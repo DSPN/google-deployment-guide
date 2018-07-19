@@ -72,6 +72,22 @@ Will be provided in future releases
 
 
 ## Uninstall the DataStax Enterprise Kubernetes Application
-Coming soon...
+### Deleting the DataStax Enterprise Kubernetes app in GCP console
+First, you would go the the DataStax Enterprise Kubernetes *Application details* screen to *DELETE* the application.  See below our sample screen:
+![](./img/gcp_console_app_delete.png)
 
+### Deleting the persistent values of your deployment
+By design, deleting a StatefulSets in Kubernetes does not remove PersistentVolumeClaims that were attached to their Pods.  This prevents users from losing their stateful data accidentally.  To remove the PersistentVolumeClaims with their attached persistent disks, you need to run the following commands:
+```
+for pv in $(kubectl get pvc --namespace $NAMESPACE \
+  --selector app.kubernetes.io/name=$APP_INSTANCE_NAME \
+  --output jsonpath='{.items[*].spec.volumeName}');
+do
+  kubectl delete pv/$pv --namespace $NAMESPACE
+done
+
+kubectl delete persistentvolumeclaims \
+  --namespace $NAMESPACE \
+  --selector app.kubernetes.io/name=$APP_INSTANCE_NAME
+```
 
