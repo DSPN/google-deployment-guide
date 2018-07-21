@@ -60,7 +60,7 @@ where [NEW_REPLICAS] is the new number.
 ### Scaling down the DataStax Enterprise cluster
 You can manually scale down the DataStax Enterprise cluster using the following procedure.  On each node, you are required to do the following steps starting from the highest-numbered pod of the DSE StatefulSet:
 * Inside the DSE container, run $ nodetool decommission.
-* Scale down the StatefulSet by one, using the **kubectl scale statefulsets** command.
+* Scale down the StatefulSet by one, using the **$ kubectl scale statefulsets** command.
 * Wait until the pod is removed from the cluster successfully.
 * Remove any persistent volume claim(s) that belong to that replica (DSE node) using the **$ kubectl delete pvc** command.
 
