@@ -73,7 +73,7 @@ Will be provided in future releases
 
 ## Uninstall the DataStax Enterprise Kubernetes Application
 ### Deleting the DataStax Enterprise Kubernetes app in GCP console
-First, you would go the the DataStax Enterprise Kubernetes **Application details** screen to **DELETE** the application.  See below our sample screen:
+First, you would go to the the DataStax Enterprise Kubernetes **Application details** screen to **DELETE** the application.  See below our sample screen:
 ![](./img/gcp_console_app_delete.png)
 
 ### Deleting the persistent values of your deployment
