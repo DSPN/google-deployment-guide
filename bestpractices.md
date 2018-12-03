@@ -17,7 +17,7 @@ The DataStax documentation provides detail on recommended machine types as well:
 
 There are plenty of options in terms of persistent storage selection in GCP.  You can always choose one most appropriate to your application performance and cost needs.
 
-Local SSDs are physically attached to the server host that hosts your virtual machine instance. Local SSDs have higher throughput and lower latency than standard persistent disks or SSD persistent disks. The data that you store on a local SSD persists only until the instance is stopped or deleted. In addition, you cannot create snapshot from a local SSD, you will need a backup strategy to accommodate for this type of disk to ensure no data loss.
+Local SSDs are physically attached to the server host that hosts your virtual machine instance. Local SSDs have higher throughput and lower latency than standard persistent disks or SSD persistent disks. The data that you store on a local SSD persists only until the instance is stopped or deleted. In addition, you cannot create snapshot from a local SSD. You will need a backup strategy to accommodate for this type of disk to ensure no data loss.
 
 Each local SSD is 375 GB in size, but you can attach up to eight local SSD devices for 3 TB of total local SSD storage space per instance. One could combine multiple local SSD devices into a single logical volume to achieve the best local SSD performance per instance.
 
@@ -46,15 +46,13 @@ While DataStax provides a Google specific snitch, we typically recommend Gossipi
 
 If you would like to extend your data center network into your Google Cloud projects, Dedicated Interconnect offers enterprise-grade connections to GCP. This solution allows you to directly connect your on-premises network to your GCP VPC. 
 
-Dedicated Interconnect
-Useful to connect to your VPC, and in hybrid environments, to extend your corporate data center’s IP space into the Google cloud, or for high-bandwidth traffic (greater than 2Gbps), for example when transferring large data sets.
+**Dedicated Interconnect** is useful to connect to your VPC, and in hybrid environments, to extend your corporate data center’s IP space into the Google cloud, or for high-bandwidth traffic (greater than 2Gbps), for example when transferring large data sets.
 
-Dedicated Interconnect can be configured to offer a 99.9% or a 99.99% uptime SLA. Please see the Dedicated Interconnect documentation for details on how to achieve these SLAs.
+**Dedicated Interconnect** can be configured to offer a 99.9% or a 99.99% uptime SLA. Please see the Dedicated Interconnect documentation for details on how to achieve these SLAs.
 
-Partner Interconnect (ATT/Century/Verizon)
-You can also extend your data center network into your Google Cloud projects through the service providers you know and love, Partner Interconnect offers enterprise-grade connections similar to Dedicated Interconnect. This solution allows you to add connectivity from your on-premises network to your GCP VPC through one of Google Cloud’s many service provider partners.
+**Partner Interconnect (ATT/Century/Verizon):** You can also extend your data center network into your Google Cloud projects through the service providers you know and love, Partner Interconnect offers enterprise-grade connections similar to Dedicated Interconnect. This solution allows you to add connectivity from your on-premises network to your GCP VPC through one of Google Cloud’s many service provider partners.
 
-In summary, all these options will support your multi-tier application architecture as well as DSE hybrid cloud deployment architecture with a more predictable network latency, application response time, and enhanced security.
+In summary, all these options will provide your multi-tier application architecture as well as DSE hybrid cloud deployment architecture with a more predictable network latency, application response time, and enhanced security.
 
 
 ## First Party Integration
