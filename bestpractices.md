@@ -1,49 +1,66 @@
 # Google Best Pracices
 
-This section of the deployment guide covers recommendations for compute, storage, network and more.
-
-## General
-
-GCP includes both Google Compute Engine (GCE) and Google Container Engine (GKE).  DataStax Enterprise can be deployed to either environment.  This guide covers hardware recommendations as well as Google Deployment Manager templates for deploying on GCE.
+This section of the deployment guide covers recommendations for compute, storage, network and more on Google Compute Engine.
 
 ## Compute
 
-DataStax Enterprise workloads perform best when given a balance of CPU, Memory and low-latency storage. The following GCE machine-types are recommended because they provide a good mix of system resources for a range of workloads. The specific machine type that is right for a given application will depend on the performance requirements of the application.
-* n1-standard-2
-* n1-standard-4
-* n1-standard-8
-* n1-standard-16
-* n1-highmem-2
-* n1-highmem-4
-* n1-highmem-8
-* n1-highmem-16
+DataStax Enterprise (DSE) workloads perform best when given a balance of CPU, Memory and low-latency storage. The following GCE machine-types are recommended because they provide a good mix of system resources for a range of workloads. The specific machine type that is right for a given application will depend on the performance requirements of the application in production.
+* n1-standard-16 or above
+* n1-highmem-16 or above (for DSE Search and DSE Analytics workloads)
 
 For more information on machine types, please visit: https://cloud.google.com/compute/docs/machine-types
 
 The DataStax documentation provides detail on recommended machine types as well: http://docs.datastax.com/en/latest-dse/datastax_enterprise/install/installGUI.html
 
+
 ## Storage
 
-Google offers a variety of storage options.  For the vast majority of cases we suggest SSD persistent disks.  The Deployment Manager templates DataStax developed in conjunction with Google are based on SSD persistent disks.  We find allocating approximately 2TB per node with 1TB reserved for compaction offers the best performance in most cases.
+There are plenty of options in terms of persistent storage selection in GCP.  You can always choose one most appropriate to your application performance and cost needs.
 
-Google also offers HDD persistent disks.  These are both less expensive and less performant than their SSD counterparts.  Given their relatively poor performance we do not recommend HDD persistent disks.
+Local SSDs are physically attached to the server host that hosts your virtual machine instance. Local SSDs have higher throughput and lower latency than standard persistent disks or SSD persistent disks. The data that you store on a local SSD persists only until the instance is stopped or deleted. In addition, you cannot create snapshot from a local SSD, you will need a backup strategy to accommodate for this type of disk to ensure no data loss.
 
-Local SSDs are another interesting option.  These are dedicated disks that are local to the host VM.  As a result they are more expensive than the persistent SSD.  They are also ephemeral, meaning that data can be lost if the instance is shut off.  Surprisingly persistent SSD outperformed local SSD in recent tests.  This is due to the parallelism of the persistent SSD.  Given all these factors we do not recommend local SSD for DataStax workloads.
+Each local SSD is 375 GB in size, but you can attach up to eight local SSD devices for 3 TB of total local SSD storage space per instance. One could combine multiple local SSD devices into a single logical volume to achieve the best local SSD performance per instance.
 
-Storage buckets are completely unsuitable for DataStax storage, however, they are great for backups.
-
-Google recently introduced RAM disks.  These are local ephemeral drives based on RAM.  As such, they are likely to be extremely performant.  They are limited in size.  RAM disks may be an interesting option for performance sensitive workloads.
+Persistent disks have many advantages.  Their performance is predictable and scale linearly with provisioned capacity until the limits for an instance's provisioned vCPUs are reached.  They have built-in redundancy to protect your data against equipment failure. Additionally, you can create snapshots of persistent disks regularly to protect against data loss. These are the recommended disks for running DataStax Enterprise.
 
 For more information on GCE disks, please visit: https://cloud.google.com/compute/docs/disks
 
+
 ## Network
 
+### VPC Network
+DSE can be deployed in single global VPC network which can span multiple regions without communicating across the public Internet. Single connection points between VPC and on-premises resources provides global VPC access, reducing cost and complexity. Shared VPC is another option to deploy DSE in a more delegated VPC manner. It allows an organization to connect resources from multiple projects to a common VPC network, so that they can communicate with each other securely and efficiently using internal IPs from that network. When you use Shared VPC, you designate a project as a host project and attach one or more other service projects to it. Please visit https://cloud.google.com/vpc/docs/shared-vpc for more details. We have seen many of our customers deploying their applications in this fashion.
+
+For more information on VPC Network, please visit https://cloud.google.com/vpc/docs/vpc
+
+### Regions and Zones
 GCP regions and zones roughly correspond to the DSE data center and rack concepts respectively. Regions are geographically separated from one another and contain zones that are physically isolated to reduce the chance of an event in one zone affecting resources in another. Geographic scale events such as hurricanes will likely only have an impact on any single region at a time. Zones should be mapped to DSE racks.  Multi-data center deployments will typically use each region as a data center.
 
+For more information on GCP regions & zones, please visit: https://cloud.google.com/compute/docs/zones
+
+### DSE Endpoint Snitch (to locate nodes and route requests)
 While DataStax provides a Google specific snitch, we typically recommend GossipingPropertyFileSnitch (GPFS) for most deployments.  GPFS is the most widely used snitch.  It also allows for hybrid deployments either across clouds or on-premises.
 
-The templates currently provided do not make use of rack awareness.  Instead they use the GossipingPropertyFileSnitch and place replicas in a single rack. We would like to change this in future releases of the template.
 
-The templates currently use dynamic IP addresses rather than static IP addresses.  If the nodes are halted and deallocated the dynamic IP addresses will be reassigned.  However, if nodes are not halted and deallocated the dynamic IPs will remain the same through reboots and hardware failures.
+## Cloud Interconnect
 
-For more information on GCP regions & zones, please visit: https://cloud.google.com/compute/docs/zones
+If you would like to extend your data center network into your Google Cloud projects, Dedicated Interconnect offers enterprise-grade connections to GCP. This solution allows you to directly connect your on-premises network to your GCP VPC. 
+
+Dedicated Interconnect
+Useful to connect to your VPC, and in hybrid environments, to extend your corporate data center’s IP space into the Google cloud, or for high-bandwidth traffic (greater than 2Gbps), for example when transferring large data sets.
+
+Dedicated Interconnect can be configured to offer a 99.9% or a 99.99% uptime SLA. Please see the Dedicated Interconnect documentation for details on how to achieve these SLAs.
+
+Partner Interconnect (ATT/Century/Verizon)
+You can also extend your data center network into your Google Cloud projects through the service providers you know and love, Partner Interconnect offers enterprise-grade connections similar to Dedicated Interconnect. This solution allows you to add connectivity from your on-premises network to your GCP VPC through one of Google Cloud’s many service provider partners.
+
+In summary, all these options will support your multi-tier application architecture as well as DSE hybrid cloud deployment architecture with a more predictable network latency, application response time, and enhanced security.
+
+
+## First Party Integration
+Google StackDriver provides a default dashboards for cloud and open source application services. It allows you to define custom dashboards with powerful visualization tools to suit your needs.
+
+At its core of DataStax Enterprise is DataStax's own distribution of Apache Cassandra. If the Cassandra plugin is not configured, Monitoring will discover Cassandra services running in your Cloud Platform project by either searching instance names for cassandra or checking for ports opened to 9160 via firewall rules. The services discovered are displayed on the Cassandra Services page in the Resources menu.
+
+If a more advanced monitoring is preferred, you can install the monitoring [agent](https://cloud.google.com/monitoring/agent/install-agent), follow the instructions on this [page](https://cloud.google.com/monitoring/agent/plugins/cassandra) to configure the Cassandra plugin on your instances. Once configured, you will see [advanced Cassandra and JVM metrics](https://cloud.google.com/monitoring/agent/plugins/cassandra#monitored-metrics) 
+
