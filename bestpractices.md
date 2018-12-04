@@ -1,4 +1,4 @@
-# Google Best Pracices
+# Best Practices for DataStax Enterprise (DSE) Deployment in Google Cloud Platform (GCP)
 
 This guide covers recommendations for compute, storage, network and more on Google Cloud Platform.
 
