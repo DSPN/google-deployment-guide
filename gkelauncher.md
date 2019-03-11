@@ -8,7 +8,11 @@ There are minimum cluster requirements that MUST be met for the deployment to su
 When answering **YES** (refer to the screenshot below) to the **Cluster Requirements** field in the Marketplace deployment configuration page, you agree to the minimum GKE cluster requirements (min. 5 n1-standard-4 nodes) to deploy DSE Kubernetes application.
 ![](./img/GCP_Marketplace_YES.png)
 
-If you do not have a GKE cluster which meets the minimum GKE cluster requirements, you can run the following **gcloud** command to create a GKE cluster.
+*Caution:* **Create Cluster** button (see screenshot below) will create a default 3 vCPUs GKE cluster which does not meet our minimum requirements.
+![](./img/GCP_Marketplace_Create_Cluster.png)
+
+You can follow the sample **gcloud** command below to create a GKE cluster with sufficient CPU and Memory resources to deploy DSE Kubernetes application.
+
 ```
 $ gcloud container clusters create <your-GKE-cluster-name> \
   --cluster-version=<your-GKE-cluster-version> \
