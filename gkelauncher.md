@@ -5,7 +5,8 @@ This document provides instructions for deploying and decommissioning Datastax E
 ## IMPORTANT NOTE
 There are minimum cluster requirements that MUST be met for the deployment to succeed. Please ensure you have a cluster meeting these minimums before deploying. The requirements are >**5 nodes of instance type n1-standard-4 with at least 60GB of disk size for each DSE node**.
 
-When answering **YES** to the **Cluster Requirements** field in the Marketplace deployment configuration page, you agree to the minimum GKE cluster requirements (min. 5 n1-standard-4 nodes) to deploy DSE Kubernetes application. If you do not have a GKE cluster which meets the minimum GKE cluster requirements, you can run the following **gcloud** command to create a GKE cluster.
+When answering **YES** (refer to the screenshot below) to the **Cluster Requirements** field in the Marketplace deployment configuration page, you agree to the minimum GKE cluster requirements (min. 5 n1-standard-4 nodes) to deploy DSE Kubernetes application. If you do not have a GKE cluster which meets the minimum GKE cluster requirements, you can run the following **gcloud** command to create a GKE cluster.
+![](./img/GCP_Marketplace_YES.png)
 ```
 $ gcloud container clusters create <your-GKE-cluster-name> \
   --cluster-version=<your-GKE-cluster-version> \
@@ -19,12 +20,14 @@ $ gcloud container get-server-config --zone us-west1-b
 ```
 This is a sample command to create a GKE clsuter with GKE cluster version 1.10.9-gke.5 in us-west1-b zone:
 ```
-$ gcloud container clusters create k8-10-9-5-gke-n1-std-4 \
-  --cluster-version=1.10.9-gke.5 \
-  --zone us-west1-b \
+$ gcloud container clusters create k8-12-5-10-gke-n1-std-4-east1-b \
+  --cluster-version=1.12.5-gke.10 \
+  --zone us-east1-b \
   --machine-type n1-standard-4  \
   --num-nodes 5
 ```
+Once your new GKE cluster is created, you can select it from the drop-down listbox (refer to the screenshot below).  In our example, we will choose **k8-12-5-10-gke-n1-std-4-east1-b**.
+![](./img/GCP_Marketplace_Select_GKE_Cluster.png)
 
 ## Installation
 ### Quick install with Google Cloud Marketplace
