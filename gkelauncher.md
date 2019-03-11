@@ -5,8 +5,10 @@ This document provides instructions for deploying and decommissioning Datastax E
 ## IMPORTANT NOTE
 There are minimum cluster requirements that MUST be met for the deployment to succeed. Please ensure you have a cluster meeting these minimums before deploying. The requirements are >**5 nodes of instance type n1-standard-4 with at least 60GB of disk size for each DSE node**.
 
-When answering **YES** (refer to the screenshot below) to the **Cluster Requirements** field in the Marketplace deployment configuration page, you agree to the minimum GKE cluster requirements (min. 5 n1-standard-4 nodes) to deploy DSE Kubernetes application. If you do not have a GKE cluster which meets the minimum GKE cluster requirements, you can run the following **gcloud** command to create a GKE cluster.
+When answering **YES** (refer to the screenshot below) to the **Cluster Requirements** field in the Marketplace deployment configuration page, you agree to the minimum GKE cluster requirements (min. 5 n1-standard-4 nodes) to deploy DSE Kubernetes application.
 ![](./img/GCP_Marketplace_YES.png)
+
+If you do not have a GKE cluster which meets the minimum GKE cluster requirements, you can run the following **gcloud** command to create a GKE cluster.
 ```
 $ gcloud container clusters create <your-GKE-cluster-name> \
   --cluster-version=<your-GKE-cluster-version> \
