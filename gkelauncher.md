@@ -9,7 +9,7 @@ When answering **YES** (refer to the screenshot below) to the **Cluster Requirem
 ![](./img/GCP_Marketplace_YES.png)
 
 *Caution:* **Create Cluster** button (see screenshot below) will create a default 3 vCPUs GKE cluster which does not meet our minimum requirements.
-![](./img/GCP_Marketplace_Create_Cluster.png)
+![](./img/GCP_Marketplace_Create_Cluster_Zoom.png)
 
 You can follow the sample **gcloud** command below to create a GKE cluster with sufficient CPU and Memory resources to deploy DSE Kubernetes application.
 
