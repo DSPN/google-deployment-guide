@@ -3,7 +3,37 @@
 This document provides instructions for deploying and decommissioning Datastax Enterprise (DSE) as a Kubernetes app in the GCP Marketplace.
 
 ## IMPORTANT NOTE
-There are minimum cluster requirements that MUST be met for the deployment to succeed. Please ensure you have a cluster meeting these minimums before deploying. The requirements are >**5 nodes of instance type n1-standard-4 with at least 60GB of disk size for each DSE node**.
+There are minimum cluster requirements that MUST be met for the deployment to succeed. Please ensure you have a cluster meeting these minimums BEFORE deploying. The requirements are >**5 nodes of instance type n1-standard-4 with at least 60GB of disk size for each DSE node**.
+
+When answering **YES** (refer to the screenshot below) to the **Cluster Requirements** field in the Marketplace deployment configuration page, you agree to having the minimum GKE cluster requirements (min. 5 n1-standard-4 nodes) to deploy DSE Kubernetes application.
+![](./img/GCP_Marketplace_YES.png)
+
+*Caution:* **Create Cluster** button (see screenshot below) will create a default 3 vCPUs GKE cluster which does not meet our minimum requirements.
+![](./img/GCP_Marketplace_Create_Cluster_Zoom.png)
+
+You can follow the sample **gcloud** command below to create a GKE cluster with sufficient CPU and Memory resources to deploy DSE Kubernetes application.
+
+```
+$ gcloud container clusters create <your-GKE-cluster-name> \
+  --cluster-version=<your-GKE-cluster-version> \
+  --zone <your-GCP-zone> \
+  --machine-type n1-standard-4  \
+  --num-nodes 5
+```
+Here is a sample command to find out what GKE cluster versions are available in us-west1-b zone:
+```
+$ gcloud container get-server-config --zone us-west1-b
+```
+This is a sample command to create a GKE clsuter with GKE cluster version 1.10.9-gke.5 in us-west1-b zone:
+```
+$ gcloud container clusters create k8-12-5-10-gke-n1-std-4-east1-b \
+  --cluster-version=1.12.5-gke.10 \
+  --zone us-east1-b \
+  --machine-type n1-standard-4  \
+  --num-nodes 5
+```
+Once your new GKE cluster is created, you can select it from the drop-down listbox (refer to the screenshot below).  In our example, we will choose **k8-12-5-10-gke-n1-std-4-east1-b**.
+![](./img/GCP_Marketplace_Select_GKE_Cluster.png)
 
 ## Installation
 ### Quick install with Google Cloud Marketplace
