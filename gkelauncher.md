@@ -73,9 +73,9 @@ SERVICE_IP=$(kubectl get \
   -o jsonpath='{.status.loadBalancer.ingress[0].ip}')
 
 echo "https://${SERVICE_IP}:8443"
-
+```
 Then log in using "admin" as Username and the output from the following command as Password:
-
+```
 echo -n `(kubectl get \
 --namespace $NAMESPACE \
 secret ${APP_INSTANCE_NAME}-dse-server-opsc-admin-pwd-secret  \
