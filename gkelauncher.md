@@ -65,16 +65,24 @@ $ cqlsh <IP-address-of-the-container>
 ```
 
 ### Accessing Opscenter
-Find the EXTERNAL-IP of ${APP_INSTANCE_NAME}-dse-server-opsc-ext-lb using "kubectl get service" and point your browser at the URL as follows:
+Find the EXTERNAL-IP of ${APP_INSTANCE_NAME}-dse-server-opsc-ext-lb using the "kubectl get service" command and point your browser at the URL as follows:
 ```
 SERVICE_IP=$(kubectl get \
   --namespace "${NAMESPACE}" \
   svc "${APP_INSTANCE_NAME}-dse-server-opsc-ext-lb" \
   -o jsonpath='{.status.loadBalancer.ingress[0].ip}')
 
-echo "http://${SERVICE_IP}:8888"
+echo "https://${SERVICE_IP}:8443"
+
+Then log in using "admin" as Username and the output from the following command as Password:
+
+echo -n `(kubectl get \
+--namespace $NAMESPACE \
+secret ${APP_INSTANCE_NAME}-dse-server-opsc-admin-pwd-secret  \
+-o jsonpath='{.data.password}')` \
+| base64 -D; echo
 ```
-You should see the console of DataStax Enterprise OpsCenter like below:
+You should see the console of DataStax Enterprise OpsCenter like below after logged in:
 ![](./img/opsc.png)
 
 
