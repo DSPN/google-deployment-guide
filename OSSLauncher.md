@@ -38,6 +38,21 @@ You can also run "cqlsh" and describe the keyspaces:
 ![](./img/OSS-cqlsh.png)
 
 
+## Possible Errors
+
+It is possible for deployments to fail. One reason might be that your GCP project doesn't have enough quota to allocate the resources needed for your cluster. In this case you will see an error like below. 
+
+![](./img/OSS-GCP-Quota-Exceeded.png)
+
+From the GCP console, go to the deployment manager and delete the failed deployment. Ask your GCP admin to increase your quota and run the delployment again.
+
+Another reason for failure is because of deployment timeouts. This can happen because you have a bad network connection. In this case you will see an error like below.
+
+![](./img/OSS-GCP-Waiter-Fails.png)
+
+From the GCP console, go to the deployment manager and delete the failed deployment and then run the delployment again.
+
+
 ## Next Steps
 
 If you want to learn more about DataStax Enterprise, the online training courses at https://academy.datastax.com/ are a great place to start.
